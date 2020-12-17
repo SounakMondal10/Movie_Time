@@ -27,12 +27,13 @@ public class MainActivity extends AppCompatActivity {
 
     //API Link - https://api.themoviedb.org/3/movie/550?api_key=0a365a15df03a57aa2c9e9c547c3bbc3
     //API Mocky Link - https://run.mocky.io/v3/40ff61ef-e8c9-47d6-8e1b-b25f3d704be0 -> 3xFIGHT CLUB
+    //Now Playing Link - https://api.themoviedb.org/3/movie/now_playing?api_key=0a365a15df03a57aa2c9e9c547c3bbc3&language=en-US&page=1
     //Example Link - http://run.mocky.io/v3/79f722b0-a730-42a0-99aa-36029861f115
     //API Key (V3) - 0a365a15df03a57aa2c9e9c547c3bbc3
     //API ReadAccessToken (V4) - eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYTM2NWExNWRmMDNhNTdhYTJjOWU5YzU0N2MzYmJjMyIsInN1YiI6IjVmZGFkOTc3ODU4Njc4MDAzZmY1YzhmNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.j7cm0KcsKod8xSNpDirzcY3h9EYOGe1EN-TjoRWD47U
     //For images, Add before path - https://image.tmdb.org/t/p/original/
 
-    public static String JSON_URL = "https://run.mocky.io/v3/40ff61ef-e8c9-47d6-8e1b-b25f3d704be0";
+    public static String JSON_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=0a365a15df03a57aa2c9e9c547c3bbc3&language=en-US&page=1";
     List<MovieModelClass> movieList;
     RecyclerView recyclerView;
 
@@ -94,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
             Log.i("Returned String", s);
             try {
                 JSONObject jsonObject = new JSONObject(s);
-                JSONArray jsonArray = jsonObject.getJSONArray("movies");
+                JSONArray jsonArray = jsonObject.getJSONArray("results");
                 for(int i=0;i<jsonArray.length();i++)
                 {
                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
