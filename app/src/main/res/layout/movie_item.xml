@@ -55,7 +55,7 @@
         android:layout_marginTop="78dp"
         android:layout_marginLeft="32dp"
         android:textColor="@color/colorWhite"
-        android:maxLength="100"/>
+        android:maxLines="5"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
