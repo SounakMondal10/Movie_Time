@@ -45,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
         movieList = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerView);
 
+        //add new buttons to go to new pages in url
+
+
         GetData getData = new GetData();
         getData.execute();
     }
