@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
+
             putDataIntoRecyclerView(movieList);
         }
     }
