@@ -1,13 +1,14 @@
 package com.sounakmondal.movietime;
 
 public class MovieModelClass {
-    String id,name, img;
+    String id,name, img, description;
 
     //constructors
-    public MovieModelClass(String id, String name, String img) {
+    public MovieModelClass(String id, String name, String img, String description) {
         this.id = id;
         this.name = name;
         this.img = img;
+        this.description = description;
     }
 
     public MovieModelClass() {
@@ -38,6 +39,11 @@ public class MovieModelClass {
         this.img = img;
     }
 
+    public String getDescription() {
+        return description;
+    }
 
-
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
