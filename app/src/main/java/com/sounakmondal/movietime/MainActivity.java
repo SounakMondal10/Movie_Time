@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,7 +17,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -33,23 +34,56 @@ public class MainActivity extends AppCompatActivity {
     //API ReadAccessToken (V4) - eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYTM2NWExNWRmMDNhNTdhYTJjOWU5YzU0N2MzYmJjMyIsInN1YiI6IjVmZGFkOTc3ODU4Njc4MDAzZmY1YzhmNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.j7cm0KcsKod8xSNpDirzcY3h9EYOGe1EN-TjoRWD47U
     //For images, Add before path - https://image.tmdb.org/t/p/original/
 
-    public static String JSON_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=0a365a15df03a57aa2c9e9c547c3bbc3&language=en-US&page=1";
+    public static String JSON_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=0a365a15df03a57aa2c9e9c547c3bbc3&language=en-US&page="; //add "1" in the end to revert
     List<MovieModelClass> movieList;
     RecyclerView recyclerView;
+    Button loadMoreButton;
+    public static int lastMovieSeenPosition = 0;
 
+    public static int currentPage = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        loadMoreButton = findViewById(R.id.loadMore_button);
+
+
         movieList = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerView);
 
-        //add new buttons to go to new pages in url
 
+        JSON_URL = JSON_URL + currentPage;
 
         GetData getData = new GetData();
         getData.execute();
+
+        //button functionality
+
+
+        loadMoreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    currentPage+=1;
+                if(currentPage<=9)
+                {
+                    JSON_URL = JSON_URL.substring(0, JSON_URL.length() - 1);
+                }
+                else JSON_URL = JSON_URL.substring(0, JSON_URL.length() - 2);
+                    JSON_URL = JSON_URL + currentPage;
+                    Log.i("JSON URL BUTTON",JSON_URL);
+                    GetData getData = new GetData();
+                    getData.execute();
+
+            }
+        });
+
+
+
+        //
+
+
     }
 
     public class GetData extends AsyncTask<String, String, String>
@@ -95,8 +129,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) //string 's' is the string 'current' returned
         {
-            Log.i("Returned String", s);
+            //Log.i("Returned String", s);
             try {
+                lastMovieSeenPosition = movieList.size();
                 JSONObject jsonObject = new JSONObject(s);
                 JSONArray jsonArray = jsonObject.getJSONArray("results");
                 for(int i=0;i<jsonArray.length();i++)
@@ -111,10 +146,13 @@ public class MainActivity extends AppCompatActivity {
                     movieList.add(model);
                 }
 
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             putDataIntoRecyclerView(movieList);
+            recyclerView.scrollToPosition(lastMovieSeenPosition-3);
+            lastMovieSeenPosition = movieList.size();
         }
 
     }
