@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
             }
             putDataIntoRecyclerView(movieList);
         }
-        
+
     }
 
     private void putDataIntoRecyclerView(List<MovieModelClass> movieList)
