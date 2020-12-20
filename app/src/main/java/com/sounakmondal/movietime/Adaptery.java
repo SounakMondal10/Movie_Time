@@ -38,7 +38,7 @@ public class Adaptery extends RecyclerView.Adapter<Adaptery.myViewHolder> {
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
         holder.name.setText(mData.get(position).getName());
         holder.id.setText(mData.get(position).getId());
-        holder.description.setText(mData.get(position).getDescription());
+        //holder.description.setText(mData.get(position).getDescription());
         Glide.with(mContext)
                 .load(mData.get(position).getImg())
                 .into(holder.img);
@@ -51,7 +51,7 @@ public class Adaptery extends RecyclerView.Adapter<Adaptery.myViewHolder> {
 
     public static class myViewHolder extends RecyclerView.ViewHolder
     {
-        TextView name, id, description;
+        TextView name, id;
         ImageView img;
 
         public myViewHolder(@NonNull View itemView) {
@@ -59,8 +59,6 @@ public class Adaptery extends RecyclerView.Adapter<Adaptery.myViewHolder> {
             name = itemView.findViewById(R.id.name_txt);
             id = itemView.findViewById(R.id.id_txt);
             img = itemView.findViewById(R.id.imageView);
-            description = itemView.findViewById(R.id.description_txt);
-
         }
     }
 }

@@ -1,14 +1,17 @@
 package com.sounakmondal.movietime;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
     List<MovieModelClass> movieList;
     RecyclerView recyclerView;
     Button loadMoreButton;
-    public static int lastMovieSeenPosition = 0;
+    public int lastMovieSeenPosition = 0;
+    boolean mHasReachedBottom = false;
 
     public static int currentPage = 1;
     @Override
@@ -47,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        loadMoreButton = findViewById(R.id.loadMore_button);
+
 
 
         movieList = new ArrayList<>();
@@ -59,29 +63,37 @@ public class MainActivity extends AppCompatActivity {
         GetData getData = new GetData();
         getData.execute();
 
-        //button functionality
 
-
-        loadMoreButton.setOnClickListener(new View.OnClickListener() {
+        //Auto-refresh data when at the end of the list
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onClick(View v) {
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                if (!recyclerView.canScrollVertically(1) && !mHasReachedBottom) {
+
                     currentPage+=1;
-                if(currentPage<=9)
-                {
-                    JSON_URL = JSON_URL.substring(0, JSON_URL.length() - 1);
-                }
-                else JSON_URL = JSON_URL.substring(0, JSON_URL.length() - 2);
+                    if(currentPage<=9)
+                    {
+                        JSON_URL = JSON_URL.substring(0, JSON_URL.length() - 1);
+                    }
+                    else JSON_URL = JSON_URL.substring(0, JSON_URL.length() - 2);
                     JSON_URL = JSON_URL + currentPage;
                     Log.i("JSON URL BUTTON",JSON_URL);
                     GetData getData = new GetData();
                     getData.execute();
 
+                    //staying at the last movie to continue scrolling
+                    lastMovieSeenPosition = movieList.size();
+
+                    mHasReachedBottom = true;
+                }
+                else if (recyclerView.canScrollVertically(1))
+                {
+                    mHasReachedBottom = false;
+                }
             }
         });
-
-
-
-        //
 
 
     }
@@ -151,8 +163,7 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             putDataIntoRecyclerView(movieList);
-            recyclerView.scrollToPosition(lastMovieSeenPosition-3);
-            lastMovieSeenPosition = movieList.size();
+            recyclerView.scrollToPosition(lastMovieSeenPosition -10);
         }
 
     }
@@ -160,9 +171,11 @@ public class MainActivity extends AppCompatActivity {
     private void putDataIntoRecyclerView(List<MovieModelClass> movieList)
     {
         Adaptery adaptery = new Adaptery(this, movieList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         recyclerView.setAdapter(adaptery);
     }
+
+
 
 
 
