@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,10 +45,11 @@ public class MainActivity extends AppCompatActivity {
     Button loadMoreButton;
     public int lastMovieSeenPosition = 0;
     boolean mHasReachedBottom = false;
+    Snackbar loadingSnackbar;
 
     public static int currentPage = 1;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -72,8 +75,11 @@ public class MainActivity extends AppCompatActivity {
 
                 if (!recyclerView.canScrollVertically(1) && !mHasReachedBottom) {
 
+                    loadingSnackbar = Snackbar.make(recyclerView,"Loading More", Snackbar.LENGTH_INDEFINITE);
+                    loadingSnackbar.show();
+
                     currentPage+=1;
-                    if(currentPage<=9)
+                    if(currentPage<=10)
                     {
                         JSON_URL = JSON_URL.substring(0, JSON_URL.length() - 1);
                     }
@@ -162,8 +168,19 @@ public class MainActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
             putDataIntoRecyclerView(movieList);
-            recyclerView.scrollToPosition(lastMovieSeenPosition -10);
+
+
+            recyclerView.scrollToPosition(lastMovieSeenPosition -7);
+
+                try{
+                    loadingSnackbar.dismiss();
+                }catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+
         }
 
     }

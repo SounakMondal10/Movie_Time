@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
@@ -9,41 +8,42 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="75dp"
-        android:layout_height="113dp"
+        android:layout_width="110dp"
+        android:layout_height="165dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/ic_launcher_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="32dp"
-        tools:ignore="VectorDrawableCompat"
-        />
+        app:srcCompat="@drawable/ic_launcher_background"
+        tools:ignore="VectorDrawableCompat" />
 
     <TextView
         android:id="@+id/name_txt"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="4dp"
         android:text="NameText"
+        android:textColor="@color/colorWhite"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageView"
-        android:layout_marginTop="4dp"
-        android:layout_marginLeft="32dp"
-        android:textSize="14sp"
-        android:textColor="@color/colorWhite"
-        />
+        android:maxLines="2"/>
 
 
     <TextView
         android:id="@+id/id_txt"
         android:layout_width="25dp"
         android:layout_height="wrap_content"
-        android:text="R_t"
-        app:layout_constraintTop_toBottomOf="@id/name_txt"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="4dp"
-        android:layout_marginLeft="32dp"
+        android:text="R_t"
         android:textColor="@color/colorWhite"
-        android:textSize="10sp"/>
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name_txt" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

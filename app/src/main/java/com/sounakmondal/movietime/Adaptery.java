@@ -36,12 +36,18 @@ public class Adaptery extends RecyclerView.Adapter<Adaptery.myViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
-        holder.name.setText(mData.get(position).getName());
-        holder.id.setText(mData.get(position).getId());
-        //holder.description.setText(mData.get(position).getDescription());
-        Glide.with(mContext)
-                .load(mData.get(position).getImg())
-                .into(holder.img);
+        try {
+            holder.name.setText(mData.get(position).getName());
+            holder.id.setText(mData.get(position).getId());
+            //holder.description.setText(mData.get(position).getDescription());
+            Glide.with(mContext)
+                    .load(mData.get(position).getImg())
+                    .into(holder.img);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
