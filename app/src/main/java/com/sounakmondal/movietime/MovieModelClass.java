@@ -1,11 +1,11 @@
 package com.sounakmondal.movietime;
 
 public class MovieModelClass {
-    String id,name, img, overview, backdrop, rating, originalLanguage ;
+    String id,name, img, overview, backdrop, rating, originalLanguage, releaseDate ;
 
 
     //constructors
-    public MovieModelClass(String id, String name, String img, String overview, String backdrop, String rating, String originalLanguage) {
+    public MovieModelClass(String id, String name, String img, String overview, String backdrop, String rating, String originalLanguage, String releaseDate) {
         this.id = id;
         this.name = name;
         this.img = img;
@@ -13,6 +13,7 @@ public class MovieModelClass {
         this.backdrop = backdrop;
         this.rating = rating;
         this.originalLanguage = originalLanguage;
+        this.releaseDate = releaseDate;
     }
 
     public MovieModelClass() {
@@ -73,5 +74,13 @@ public class MovieModelClass {
 
     public void setOriginalLanguage(String originalLanguage) {
         this.originalLanguage = originalLanguage;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
     }
 }

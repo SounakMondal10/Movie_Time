@@ -1,13 +1,18 @@
 package com.sounakmondal.movietime;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -65,11 +70,18 @@ public class MainActivity extends AppCompatActivity {
 
         main_toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(main_toolbar);
+
+        main_toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
+        main_toolbar.setSubtitleTextColor(Color.parseColor("#ffffff"));
+
         main_spinner = findViewById(R.id.mainActivity_spinner);
+//        main_spinner.setBackgroundColor(Color.parseColor("#ffffff"));
+
         ArrayList<String> watchOptions = new ArrayList<String>();
         watchOptions.add("Movies");
         watchOptions.add("TV Series");
 
+        //spinner adapter setup
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1, watchOptions);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         main_spinner.setAdapter(spinnerAdapter);
@@ -165,6 +177,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //custom recyclerview item onClickListener
+        try{
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getApplicationContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                ItemPage.setItem(movieList.get(position));
+                Intent intent = new Intent(MainActivity.this,ItemPage.class);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+                // ...
+            }
+        }));}catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
     }
 
@@ -224,10 +254,12 @@ public class MainActivity extends AppCompatActivity {
                     if(isMovie == true)
                     {
                         model.setName(jsonObject1.getString("original_title"));
+                        model.setReleaseDate(jsonObject1.getString("release_date"));
                     }
                     else
                     {
                         model.setName(jsonObject1.getString("original_name"));
+                        model.setReleaseDate(jsonObject1.getString("first_air_date"));
                     }
                     model.setId(jsonObject1.getString("id"));
                     model.setRating(jsonObject1.getString("vote_average"));

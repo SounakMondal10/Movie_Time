@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/colorPrimary">
 
     <ImageView
         android:id="@+id/imageView"
@@ -20,7 +20,7 @@
 
     <TextView
         android:id="@+id/name_txt"
-        android:layout_width="100dp"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="4dp"
@@ -29,11 +29,12 @@
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageView"
-        android:maxLines="2"/>
+        android:maxLines="1"
+        android:ellipsize="end"/>
 
 
     <TextView
-        android:id="@+id/id_txt"
+        android:id="@+id/rating_txt"
         android:layout_width="25dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
