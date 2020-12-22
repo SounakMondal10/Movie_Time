@@ -1,14 +1,18 @@
 package com.sounakmondal.movietime;
 
 public class MovieModelClass {
-    String id,name, img, description;
+    String id,name, img, overview, backdrop, rating, originalLanguage ;
+
 
     //constructors
-    public MovieModelClass(String id, String name, String img, String description) {
+    public MovieModelClass(String id, String name, String img, String overview, String backdrop, String rating, String originalLanguage) {
         this.id = id;
         this.name = name;
         this.img = img;
-        this.description = description;
+        this.overview = overview;
+        this.backdrop = backdrop;
+        this.rating = rating;
+        this.originalLanguage = originalLanguage;
     }
 
     public MovieModelClass() {
@@ -39,11 +43,35 @@ public class MovieModelClass {
         this.img = img;
     }
 
-    public String getDescription() {
-        return description;
+    public String getOverview() {
+        return overview;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setOverview(String overview) {
+        this.overview = overview;
+    }
+
+    public String getBackdrop() {
+        return backdrop;
+    }
+
+    public void setBackdrop(String backdrop) {
+        this.backdrop = backdrop;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
+    public String getOriginalLanguage() {
+        return originalLanguage;
+    }
+
+    public void setOriginalLanguage(String originalLanguage) {
+        this.originalLanguage = originalLanguage;
     }
 }

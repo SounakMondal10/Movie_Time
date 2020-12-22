@@ -2,24 +2,17 @@ package com.sounakmondal.movietime;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -236,9 +229,12 @@ public class MainActivity extends AppCompatActivity {
                     {
                         model.setName(jsonObject1.getString("original_name"));
                     }
-                    model.setId(jsonObject1.getString("vote_average"));
+                    model.setId(jsonObject1.getString("id"));
+                    model.setRating(jsonObject1.getString("vote_average"));
                     model.setImg("https://image.tmdb.org/t/p/original/" + jsonObject1.getString("poster_path"));
-                    model.setDescription(jsonObject1.getString("overview"));
+                    model.setBackdrop("https://image.tmdb.org/t/p/original/" + jsonObject1.getString("backdrop_path"));
+                    model.setOriginalLanguage(jsonObject1.getString("original_language"));
+                    model.setOverview(jsonObject1.getString("overview"));
                     movieList.add(model);
                 }
 
@@ -251,6 +247,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             recyclerView.scrollToPosition(lastMovieSeenPosition -7);
+            Adaptery.setMovieListUpdatedCopy(movieList);//adapter gets it's copy of the updated movieList
 
                 try{
                     if(currentPage!=1)
