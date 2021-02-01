@@ -18,7 +18,11 @@
             android:id="@+id/mainActivity_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="end"
+            android:layout_marginLeft="30dp"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:backgroundTint="@color/colorPrimary"
+
             />
 
     </androidx.appcompat.widget.Toolbar>

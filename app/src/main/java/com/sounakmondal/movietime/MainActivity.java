@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -82,7 +83,8 @@ public class MainActivity extends AppCompatActivity {
         watchOptions.add("TV Series");
 
         //spinner adapter setup
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1, watchOptions);
+        //ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1, watchOptions);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(MainActivity.this,R.layout.spinner_item, watchOptions);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         main_spinner.setAdapter(spinnerAdapter);
 
@@ -110,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                     JSON_URL+=currentPage;
                     movieList = new ArrayList<>();
                     loadingSnackbar = Snackbar.make(recyclerView,"Loading TV Series", Snackbar.LENGTH_LONG);
-                    loadingSnackbar.show();
+                    loadingSnackbar.setTextColor(getResources().getColor(R.color.colorAccent)).show();
                     getData = new GetData();
                     getData.execute();
                     isMovie = false;
@@ -126,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                     if(isMovie == false)
                     {
                         loadingSnackbar = Snackbar.make(recyclerView,"Loading Movies", Snackbar.LENGTH_LONG);
-                        loadingSnackbar.show();
+                        loadingSnackbar.setTextColor(getResources().getColor(R.color.colorAccent)).show();
                     }
                     getData = new GetData();
                     getData.execute();
@@ -153,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
                     currentPage+=1;
 
                     loadingSnackbar = Snackbar.make(recyclerView,"Loading More", Snackbar.LENGTH_INDEFINITE);
-                    loadingSnackbar.show();
+                    loadingSnackbar.setTextColor(getResources().getColor(R.color.colorAccent)).show();
 
                     if(currentPage<=10)
                     {
