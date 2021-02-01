@@ -18,6 +18,7 @@ import static com.sounakmondal.movietime.Adaptery.getMovieListUpdatedCopy;
 public class ItemPage extends AppCompatActivity {
     ImageView backdrop;
     TextView name, date, language, overview;
+    Integer id;
     public static MovieModelClass item;
 
     @Override
@@ -30,7 +31,7 @@ public class ItemPage extends AppCompatActivity {
         date = findViewById(R.id.item_page_releaseDateTV);
         language = findViewById(R.id.item_page_language);
         overview = findViewById(R.id.item_page_overview);
-
+        id = Integer.parseInt(item.getId());
 
         try
         {
