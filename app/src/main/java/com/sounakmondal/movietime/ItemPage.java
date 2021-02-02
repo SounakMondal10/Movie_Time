@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -41,7 +42,13 @@ public class ItemPage extends AppCompatActivity {
     RecyclerView similarRecyclerView;
     GetSimilarData getSimilarData;
 
-    String base_URL = "https://api.themoviedb.org/3/tv/";
+
+
+
+    String base_URL = "https://api.themoviedb.org/3/";
+    String base_URL_TV = "tv/";
+    String base_URL_movies = "movie/";
+
     String id_URL ="";
     String extension_URL = "/similar?api_key=0a365a15df03a57aa2c9e9c547c3bbc3&language=en-US&page=1";
     String finalURL;
@@ -60,7 +67,13 @@ public class ItemPage extends AppCompatActivity {
         similar = findViewById(R.id.similar_recyclerViewText);
         similarRecyclerView = findViewById(R.id.similar_recyclerView);
         id_URL = item.getId();
-        finalURL = base_URL+id_URL+extension_URL;
+
+//        finalURL = base_URL+id_URL+extension_URL;
+        if(isMovie==true)
+        {
+            finalURL = base_URL+base_URL_movies+id_URL+extension_URL;
+        }
+        else{finalURL = base_URL+base_URL_TV+id_URL+extension_URL;}
         id = Integer.parseInt(item.getId());
         similarItemsList = new ArrayList<>();
 
@@ -68,6 +81,8 @@ public class ItemPage extends AppCompatActivity {
         try
         {
             Glide.with(getApplicationContext()).load(item.getBackdrop()).into(backdrop);
+
+
             name.setText(item.getName());
             date.setText(item.getReleaseDate().substring(0,4));
             language.setText(item.getOriginalLanguage());
@@ -154,7 +169,6 @@ public class ItemPage extends AppCompatActivity {
                     try {
                         if(similarItemsList.isEmpty()==false)
                         {
-                            similarItemsList.clear();
                         }
                         similarItemsList.add(model);
                         putDataIntoRecyclerView(similarItemsList);
@@ -171,7 +185,7 @@ public class ItemPage extends AppCompatActivity {
     private void putDataIntoRecyclerView(List<MovieModelClass> movieList)
     {
         Adaptery adaptery = new Adaptery(this, movieList);
-        similarRecyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 3));
+        similarRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         similarRecyclerView.setAdapter(adaptery);
     }
 
