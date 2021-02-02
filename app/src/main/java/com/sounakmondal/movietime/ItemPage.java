@@ -2,6 +2,7 @@ package com.sounakmondal.movietime;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,7 +18,7 @@ import static com.sounakmondal.movietime.Adaptery.getMovieListUpdatedCopy;
 
 public class ItemPage extends AppCompatActivity {
     ImageView backdrop;
-    TextView name, date, language, overview;
+    TextView name, date, language, overview, similar;
     Integer id;
     public static MovieModelClass item;
 
@@ -31,6 +32,7 @@ public class ItemPage extends AppCompatActivity {
         date = findViewById(R.id.item_page_releaseDateTV);
         language = findViewById(R.id.item_page_language);
         overview = findViewById(R.id.item_page_overview);
+        similar = findViewById(R.id.similar_recyclerViewText);
         id = Integer.parseInt(item.getId());
 
         try
@@ -40,6 +42,13 @@ public class ItemPage extends AppCompatActivity {
             date.setText(item.getReleaseDate().substring(0,4));
             language.setText(item.getOriginalLanguage());
             overview.setText(item.getOverview());
+
+            if(MainActivity.isMovie==true)
+            {
+                similar.setText("Similar Movies");
+            }
+            else{similar.setText("Similar TV Shows");}
+            Log.i("ID",id.toString());
         }
         catch (Exception e)
         {

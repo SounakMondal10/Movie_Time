@@ -57,7 +57,7 @@
             android:layout_marginTop="1dp"
             android:maxLength="4"
             android:text="2020"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorGrey"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_page_ItemName" />
@@ -70,7 +70,7 @@
             android:layout_marginTop="1dp"
             android:maxLength="4"
             android:text="en"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorGrey"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@id/item_page_releaseDateTV"
             app:layout_constraintTop_toBottomOf="@id/item_page_ItemName" />
@@ -83,10 +83,32 @@
             android:layout_marginLeft="12dp"
             android:layout_marginTop="24dp"
             android:text="Overview"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorGrey"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_page_releaseDateTV" />
+        <TextView
+            android:id="@+id/similar_recyclerViewText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/item_page_overview"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="12dp"
+            android:text="Similar"
+            android:textSize="16sp"
+            android:textColor="@color/colorWhite"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/similar_recyclerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/similar_recyclerViewText"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="12dp"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

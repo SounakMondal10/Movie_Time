@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     Toolbar main_toolbar;
     Spinner main_spinner;
     GetData getData;
-    Boolean isMovie;
+    public static Boolean isMovie;
 
 
     public static int currentPage = 1;
